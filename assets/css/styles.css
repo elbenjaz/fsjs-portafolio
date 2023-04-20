@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto+Mono&display=swap');
+
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+#Menu {
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* Hero Section */
+#Hero-Section {
+  font-family: 'Roboto Mono', monospace;
+  background-image: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+}
+
+#Info {
+  background-color: rgba(0, 0, 255, 0.5);
+  color: #fff;
+  padding: 0px 20px;
+  border-radius: 10px;
+}
+
+/* Mis trabajos */
+#Mis-trabajos .image-top {
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#logo_desafiolatam {
+  height: 2.5em;
+}
+
+/* Contacto */
+#Contacto-card {
+  width: 30rem;
+  margin: 0 auto;
+}
+
+#Contacto-card a {
+  text-decoration: none;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 1.5s infinite;
+}
