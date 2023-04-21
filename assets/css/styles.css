@@ -8,7 +8,6 @@ body {
   font-family: 'Roboto Mono', monospace;
 }
 
-/* Hero Section */
 #Hero-Section {
   font-family: 'Roboto Mono', monospace;
   background-image: url("../img/bg.jpg");
@@ -24,7 +23,10 @@ body {
   border-radius: 10px;
 }
 
-/* Mis trabajos */
+#Acerca-de-mi a {
+  text-decoration: none;  
+}
+
 #Mis-trabajos .image-top {
   height: 250px;
   background-repeat: no-repeat;
@@ -35,7 +37,6 @@ body {
   height: 2.5em;
 }
 
-/* Contacto */
 #Contacto-card {
   width: 30rem;
   margin: 0 auto;
