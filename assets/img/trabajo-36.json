@@ -1,0 +1,729 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Mi Market Latino",
+    "description": "Proyecto Final de Marketplace",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:3000/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Users management"
+    },
+    {
+      "name": "login",
+      "description": "Users authentication"
+    },
+    {
+      "name": "products",
+      "description": "Products management"
+    },
+    {
+      "name": "orders",
+      "description": "Orders management"
+    },
+    {
+      "name": "favorites",
+      "description": "Favorites management"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Users": {
+        "required": [
+          "email",
+          "firstname",
+          "lastname",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "description": "User ID"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "User name"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "User lastname"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          },
+          "address": {
+            "type": "string",
+            "description": "User address"
+          },
+          "phone": {
+            "type": "integer",
+            "description": "User phone"
+          },
+          "avatar_url": {
+            "type": "string",
+            "description": "User avatar"
+          },
+          "sign_in_google": {
+            "type": "boolean",
+            "description": "Log in with Google"
+          },
+          "date_add": {
+            "type": "string",
+            "description": "User registration date"
+          },
+          "date_upd": {
+            "type": "string",
+            "description": "User update date"
+          }
+        },
+        "example": {
+          "firstname": "Amanda",
+          "lastname": "Fuentes",
+          "email": "amanda.fuentes@example.com",
+          "password": "password",
+          "address": "Avenida del Sol 1258",
+          "phone": "56912345678",
+          "avatar": "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
+          "sign_in_google": false,
+          "date_add": "2024-02-14T16:00:00.000Z",
+          "date_upd": "2024-02-14T16:00:00.000Z"
+        }
+      },
+      "Login": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          }
+        },
+        "example": {
+          "email": "amanda.fuentes@example.com",
+          "password": "password"
+        }
+      },
+      "Products": {
+        "required": [
+          "name",
+          "price",
+          "description",
+          "image_url",
+          "category"
+        ],
+        "type": "object",
+        "properties": {
+          "id_product": {
+            "type": "integer",
+            "description": "Product ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "price": {
+            "type": "number",
+            "description": "Product price"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Product image url"
+          },
+          "category": {
+            "type": "string",
+            "description": "Product category"
+          },
+          "date_add": {
+            "type": "string",
+            "description": "Product creation date"
+          }
+        },
+        "example": {
+          "name": "Planta María Juana Kawaii Bordada",
+          "price": 30000,
+          "description": "Lo mejor de cuatro mundos",
+          "image_url": "https://i.pinimg.com/736x/be/d6/3f/bed63fbd3b545cd5e15e18caf1a89885.jpg",
+          "category": "manualidades",
+          "date_add": "2024-02-14T16:00:00.000Z"
+        }
+      },
+      "Orders": {
+        "required": [
+          "id_user",
+          "total_price",
+          "purchase_date"
+        ],
+        "type": "object",
+        "properties": {
+          "id_order": {
+            "type": "integer",
+            "description": "Orden ID"
+          },
+          "id_user": {
+            "type": "integer",
+            "description": "User ID that placed the order"
+          },
+          "total_price": {
+            "type": "number",
+            "description": "Total price"
+          },
+          "purchase_date": {
+            "type": "string",
+            "description": "Purchase date"
+          },
+          "id_product": {
+            "type": "integer",
+            "description": "Product ID in the order"
+          },
+          "product_quantity": {
+            "type": "integer",
+            "description": "Product quantity in the order"
+          }
+        },
+        "example": {
+          "id_order": 1234,
+          "id_user": 1,
+          "total_price": 30000,
+          "id_product": 1,
+          "product_quantity": 1,
+          "purchase_date": "2024-02-14T18:00:00.000Z"
+        }
+      },
+      "Favorites": {
+        "required": [
+          "id_user",
+          "id_product"
+        ],
+        "type": "object",
+        "properties": {
+          "id_user": {
+            "type": "integer",
+            "description": "User ID thtat marks favorite"
+          },
+          "id_product": {
+            "type": "integer",
+            "description": "Product ID marked as favorite"
+          }
+        },
+        "example": {
+          "id_user": 1,
+          "id_product": 1
+        }
+      }
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "User authentication",
+        "requestBody": {
+          "description": "Authentify user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "travel": {
+                    "$ref": "#/components/schemas/Login"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "User's token",
+                      "example": "ben12jua34car56val78"
+                    }
+                  },
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Incorrect user and/or password",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "User creation",
+        "requestBody": {
+          "description": "User object creation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "travel": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsuccessfull operation",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "Get user's profile by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID",
+            "content": {}
+          },
+          "404": {
+            "description": "User ID not found",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "Update user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID to be updated",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "travel": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID",
+            "content": {}
+          },
+          "404": {
+            "description": "User ID not found",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/products": {
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Product creation",
+        "requestBody": {
+          "description": "Create product object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "travel": {
+                    "$ref": "#/components/schemas/Products"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsuccessfull operation",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Obtain all products",
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unsuccsessfull operation",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Obtain product detail by it's ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid product ID",
+            "content": {}
+          },
+          "404": {
+            "description": "Product ID not found",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Erase product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid product ID",
+            "content": {}
+          },
+          "404": {
+            "description": "Product ID not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "orders"
+        ],
+        "summary": "Order creation",
+        "requestBody": {
+          "description": "Create order object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "travel": {
+                    "$ref": "#/components/schemas/Orders"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Orders"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsuccessfull operation",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/orders/{id_user}": {
+      "get": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "orders"
+        ],
+        "summary": "Obtain order detail by user ID",
+        "parameters": [
+          {
+            "name": "id_user",
+            "in": "path",
+            "description": "User ID to whoem orders correspond",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Orders"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unsuccessfull operation",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/favorites/{id}": {
+      "put": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "tags": [
+          "favorites"
+        ],
+        "summary": "Update favorites with user ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID who updates they favorites",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Edit favorite object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "travel": {
+                    "$ref": "#/components/schemas/Favorites"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Favorites"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user ID"
+          },
+          "404": {
+            "description": "User ID not found"
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  }
+}
